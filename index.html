@@ -1,0 +1,207 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css-grid</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <!--------------------------------nav bar--------------------------------------->
+<nav id="navbar">
+    <header>
+      <h1>Introduction to CSS Grid</h1>
+    </header>
+      <a href="#Setting_Up_CSS_Grid" class="nav-link">Setting Up CSS Grid</a>
+      <a href="#Explicit_vs_Implicit_Tracks" class="nav-link">Explicit vs Implicit Tracks</a>
+      <a href="#Adding_Grid-Gap" class="nav-link">Adding Grid-Gap</a>
+      <a href="#The_Repeat()_Function" class="nav-link">The Repeat() Function</a>
+      <a href="#Fractional_Units" class="nav-link">Fractional Units</a>
+  </nav>
+  
+  
+  
+  
+  <main id="main-doc">
+    
+  <!-----------------------------------------section1--------------------------------------------->
+  <section class="main-section" id="Setting_Up_CSS_Grid">
+    <header>
+      <h1>Setting Up CSS Grid</h1>
+    </header>
+    <p>
+        
+  Grid is extremely easy to setup — all it takes is two lines of CSS.
+    <h3>
+  HTML
+    </h3>
+    <code>
+  &lt;div class=”wrapper”&gt;
+    &lt;div class=”item”&gt;1&lt;/div&gt;
+    &lt;div class=”item”&gt;2&lt;/div&gt;
+    &lt;div class=”item”&gt;3&lt;/div&gt;
+    &lt;div class=”item”>4&lt;/div&gt;
+    &lt;div class=”item”&gt;5&lt;/div&gt;
+    &lt;div class=”item”&gt;6&lt;/div&gt;
+  &lt;/div&gt;
+    </code>
+    <h2>
+  CSS
+    </h2>
+    <code>
+  .wrapper {
+      display: grid;
+      grid-template-columns: 10rem 10rem 10rem;
+  }
+    </code> 
+  
+    <p>
+      You’ll notice that, unlike when setting Flexbox to <code>display: flex</code>, adding <code>display: grid</code> to your wrapper doesn’t immediately make a difference. This is because you aren’t explicitly defining how many columns you want your grid to have. You’ll do this with <code>grid-template-columns</code> like I did above. So in this example, I’m setting three columns to have a width of 10rem each.
+    </p>
+  <img src="https://cdn-images-1.medium.com/max/1000/1*gM6oUC2Btquu3xOmU1Tyyw.png" alt="Basic CSS Grid">
+    <div class='img-text'>Basic CSS Grid</div>
+    <p>
+  You can use any value you want when setting grid-template-columns, but I suggest staying away from percentages unless you’re trying to add up to 100%. This is because you will have to take your amount of grid-gap (which we’ll dive into in a little bit) into account, and that can get a little tricky.
+    </p>
+    
+    
+  </section>
+  
+  <!---------------------------------------------section2----------------------------------->
+  <section class="main-section" id="Explicit_vs_Implicit_Tracks">
+    <header>
+      <h1>Explicit vs Implicit Tracks</h1>
+    </header>
+    <p>
+  Before I talk about explicit and implicit tracks, let’s first talk about what tracks are. Tracks are how columns and rows are numbered. Instead of counting the individual columns and rows by themselves, in CSS Grid you count them by the track lines. Here’s the grid we started with — I’ve numbered all of the track rows and columns to make it a little easier for you to see.
+    </p>
+    <img src='https://cdn-images-1.medium.com/max/800/1*eaq_Wr-_L5XHfgNYQMaJ9g.png' alt='CSS Grid with column lines and row lines numbered out'>
+    <div class='img-text'>
+  CSS Grid with column lines and row lines numbered out
+    </div>
+      <p>
+  You can see that we actually have four column lines and three row lines. This will help when placing your items on the grid.
+    </p>
+    <p>
+  A quick side note: if you’re using Firefox’s Developer Edition (the beta version of the regular Firefox) it actually has some great dev tools for seeing the column and row track numbers. If you inspect your wrapper element and then go to the layout tab, check the box for your wrapper and now your grid will look like below! I really hope Chrome adds an inspect feature like this in the future. It’s extremely helpful.
+    </p>
+    <img src="https://cdn-images-1.medium.com/max/800/1*oQHjZ2ItmBdXq1vXdekrpg.png" alt="Firefox Developer Edition Inspector Tools">
+    <div class='img-text'>
+  Firefox Developer Edition Inspector Tools
+    </div>
+    <p>
+  Let’s go back to the difference between explicit and implicit tracks. If we take our code from above, you’ll notice that we’ve only set our columns. In this case, we’ve explicitly set our columns to have three, but we’ve implicitly set our rows. We have six items, but obviously all of these items cannot fit in three columns so a second row gets implicitly set.
+    </p>
+    
+  This is a little confusing, so I definitely recommend messing around with CSS Grid on your own to see the difference between explicit and implicit tracks.
+    </p>
+  </section>
+  
+  <!-------------------------------------section3-------------------------------------------->
+  <section class="main-section" id="Adding_Grid-Gap">
+    <header>
+      <h1>Adding Grid-Gap</h1>
+    </header>
+    <p>
+  Think of grid gap like margin except it’ll only be added between items and not to the outside of the grid. I’ve run into so many cases when I add margin on items in a Flexbox grid only to have to go to the grid’s wrapper and set the same amount of margin, but negative, to offset the margin that gets set outside of the grid. Thankfully with CSS Grid, you don’t have to deal with that.
+  </p>
+    <p>
+  Let’s take our example CSS above and add some grid-gap.
+    </p>
+    
+    <code>
+  .wrapper {
+    display: grid;
+    grid-template-columns: 10rem 10rem 10rem;
+    grid-gap: 1rem;
+  }
+     </code>
+     <img src="https://cdn-images-1.medium.com/max/800/1*K_UjQgMhdudxQg3uDlzT0A.png" alt="CSS Grid with 1rem of grid-gap">
+    <div class='img-text'>
+  CSS Grid with 1rem of grid-gap
+    </div>
+    <p>
+    I used the shorthand property <code>grid-gap</code>, but you can define an explicit value for the columns and rows by using <code>grid-column-gap</code> and <code>grid-row-gap</code>.
+    </p>
+  </section>
+  
+  <!----------------------------------------------section4------------------------------------>
+  <section class="main-section" id="The_Repeat()_Function">
+    <header>
+      <h1>The Repeat() Function</h1>
+    </header>
+    <p>
+  Defining how wide you want each of your columns to be when using grid-template-columns with three columns that are all the same width is pretty simple. But that’s a lot of typing if you want any more columns than that. This is where the repeat() function comes in.
+    </p>
+    <p>
+  Here’s our example we’ve been using with the repeat() function added in.
+    </p>
+    <code>
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 10rem);
+    grid-gap: 1rem;
+  }
+    </code>
+    <p>
+  As you can see in my CSS, I’m setting three columns each to be 10rems wide. This grid will look exactly like the grid pictured in our grid-gap example. By using the repeat() function we’re just making writing things a little simpler and easier to read for when you’re wanting to set a lot of columns.
+    </p>
+  </section>
+  
+  <!--------------------------------------------------section5-------------------------------->
+  <section class="main-section" id="Fractional_Units">
+    <header>
+      <h1>Fractional Units</h1>
+    </header>
+    <p>
+  Fractional units, or fr, are a new CSS length unit introduced with CSS Grid and one that I can see myself using all the time. Say we want three columns all of equal width. Instead of setting width: calc(100% / 3) on the items, we can use fractional units. Think of fractional units as “free space.”
+    </p>
+    <p>
+  Let’s continue on with our example that we’ve been using.
+    </p>
+    <code>
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+  }
+    </code>
+    <p>
+  You’ll notice that the only thing I changed was grid-template-columns. I’m now telling the browser that I want three columns, and that I want each of those columns to take up one fractional unit or one “free space.” This works very similarly to Flexbox’s flex-grow property.
+    </p>
+    <img src="https://cdn-images-1.medium.com/max/800/1*KkNsqz_QKAkju51FKdXueg.png" alt="CSS Grid using fractional units">
+    <div class="img-text">
+  CSS Grid using fractional units
+    </div>
+     <p>
+  The reason each item is a little wider than in our previous example is because they are now taking up as much space as they can while still fitting in three columns. In this case, I didn’t set a hard width so they are taking up the full-width of my screen. I know this is a little hard to see without having it on your own screen, so I definitely recommend messing with this on your own.
+    </p>
+    <p> 
+  You don’t have to set all of your columns to be 1fr, either. Below is an example where I’ve set my first and third column to 10rems while my middle column is 1fr. You can also set your columns to 2fr, 3fr, and so on, and that column’s items will take up 2x, 3x (and so on) the amount of space.
+    </p>
+  <img src="https://cdn-images-1.medium.com/max/800/1*S5AlUk408TVraTNRgFe0JQ.png" alt="CSS Grid with only the middle column set to 1fr">
+    <div class="img-text">
+  CSS Grid with only the middle column set to 1fr
+    </div>
+    <div class='list'>
+      <h3>
+        Topics reviewed.
+      </h3>
+      <ul>
+        <li>Setting Up CSS Grid</li>
+        <li>Explicit vs Implicit Tracks</li>
+        <li>Adding Grid-Gap</li>
+        <li>The Repeat() Function</li>
+        <li>Fractional Units</li>
+      </ul> 
+    </div>
+  </section>
+    <footer>
+      <p>
+        Content from <a href="https://medium.freecodecamp.org/a-beginners-guide-to-css-grid-3889612c4b35">free code camp/Kara Luton</a>.
+      </p>
+    </footer>
+  </main>
+  <!-- content from https://medium.freecodecamp.org/a-beginners-guide-to-css-grid-3889612c4b35 -->
+</body>
+</html>
